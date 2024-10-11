@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import io from "socket.io-client";
-import { Badge, IconButton, TextField } from '@mui/material';
-import { Button } from '@mui/material';
+import { Badge, IconButton, TextField, Button } from '@mui/material';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import VideocamOffIcon from '@mui/icons-material/VideocamOff'
-// import styles from "./VideoMeet.module.css";
 import CallEndIcon from '@mui/icons-material/CallEnd'
 import MicIcon from '@mui/icons-material/Mic'
 import MicOffIcon from '@mui/icons-material/MicOff'
@@ -12,7 +10,6 @@ import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import StopScreenShareIcon from '@mui/icons-material/StopScreenShare'
 import ChatIcon from '@mui/icons-material/Chat'
 import server from '../../../backend/src/environment';
-// import "./VideoMeetStyle.css";
 
 const server_url = `${server}`;
 
@@ -24,7 +21,7 @@ const peerConfigConnections = {
     ]
 }
 
-export default function VideoMeetComponent() {
+export default function VideoMeet() {
 
     var socketRef = useRef();
     let socketIdRef = useRef();
@@ -446,70 +443,18 @@ export default function VideoMeetComponent() {
         getMedia();
     }
 
-    const styles = {
-        meetVideoContainer: {
-            position: 'relative',
-            height: '100vh',
-            background: 'rgb(1, 4, 48)',
-        },
-        meetUserVideo: {
-            position: 'absolute',
-            bottom: '10vh',
-            height: '20vh',
-            width: 'auto',
-            left: 0,
-            borderRadius: '20px',
-        },
-        buttonContainers: {
-            position: 'absolute',
-            width: '100vw',
-            bottom: 0,
-            textAlign: 'center',
-        },
-        buttonIcon: {
-            fontSize: '3rem',
-        },
-        conferenceView: {
-            display: 'flex',
-            padding: '10px',
-            gap: '10px',
-        },
-        conferenceVideo: {
-            width: '40vw',
-            height: '20vh',
-            minWidth: '30vw',
-            borderRadius: '10px',
-        },
-        chatRoom: {
-            position: 'absolute',
-            height: '90vh',
-            right: 0,
-            background: 'white',
-            borderRadius: '10px',
-            width: '30vw',
-            paddingInline: '20px',
-        },
-        chatContainer: {
-            position: 'relative',
-            height: '100%',
-        },
-        chattingArea: {
-            position: 'absolute',
-            bottom: 0,
-        },
-    };
 
     return (
-        <div style={styles.meetVideoContainer}>
+        <div>
 
             {askForUsername === true ?
 
                 <div style={{display:'flex', padding:20, alignItems:'center'}}>
 
                     <div style={{marginLeft:100, marginTop:-150}}>
-                    <h2 style={{fontFamily:'outfit', color:'white'}}>Enter into Lobby </h2>
+                    <h2 style={{fontFamily:'outfit'}}>Enter into Lobby </h2>
                     <div style={{display:'flex', alignItems:'center'}}>
-                    <TextField style={{margin:10, backgroundColor:'white', borderRadius:10}} id="outlined-basic" label="Username" value={username} onChange={e => setUsername(e.target.value)} variant="outlined" />
+                    <TextField style={{margin:10}} id="outlined-basic" label="Username" value={username} onChange={e => setUsername(e.target.value)} variant="outlined" />
                     <Button style={{height:50}} variant="contained" onClick={connect}>Connect</Button>
                     </div>
                     </div>
@@ -521,14 +466,14 @@ export default function VideoMeetComponent() {
                 </div> :
 
 
-                <div className="meetVideoContainer">
+                <div style={{ position: 'relative', height: '100vh', background: 'rgb(1, 4, 48)' }}>
 
-                    {showModal ? <div className="chatRoom">
+                    {showModal ? <div style={{ position: 'absolute', height: '90vh', right: 0, background: 'white', borderRadius: '10px', width: '30vw', paddingInline: '20px' }}>
 
-                        <div className="chatContainer">
+                        <div style={{ position: 'relative', height: '100%' }}>
                             <h1>Chat</h1>
 
-                            <div className="chattingDisplay">
+                            <div style={{ padding: '10px', gap: '10px' }}>
 
                                 {messages.length !== 0 ? messages.map((item, index) => {
 
@@ -544,7 +489,7 @@ export default function VideoMeetComponent() {
 
                             </div>
 
-                            <div className="chattingArea">
+                            <div style={{ position: 'absolute', bottom: 0 }}>
                                 <TextField value={message} onChange={(e) => setMessage(e.target.value)} id="outlined-basic" label="Enter Your chat" variant="outlined" />
                                 <Button style={{margin:10}} variant='contained' onClick={sendMessage}>Send</Button>
                             </div>
@@ -554,8 +499,8 @@ export default function VideoMeetComponent() {
                     </div> : <></>}
 
 
-                    <div className="buttonContainers" style={styles.buttonContainers}>
-                        <IconButton onClick={handleVideo} style={{ color: "white", ...styles.buttonIcon }}>
+                    <div style={{ position: 'absolute', width: '100vw', bottom: 0, textAlign: 'center' }}>
+                        <IconButton onClick={handleVideo} style={{ color: "white" }}>
                             {(video === true) ? <VideocamIcon /> : <VideocamOffIcon />}
                         </IconButton>
                         <IconButton onClick={handleEndCall} style={{ color: "red" }}>
@@ -578,12 +523,13 @@ export default function VideoMeetComponent() {
                     </div>
 
 
-                    <video className="meetUserVideo" ref={localVideoref} autoPlay muted></video>
+                    <video style={{ position: 'absolute', bottom: '10vh', height: '20vh', width: 'auto', left: 0, borderRadius: '20px' }} ref={localVideoref} autoPlay muted></video>
 
-                    <div className="conferenceView" style={styles.conferenceView}>
+                    <div style={{ display: 'flex', padding: 10, gap: 10 }}>
                         {videos.map((video) => (
                             <div key={video.socketId}>
                                 <video
+
                                     data-socket={video.socketId}
                                     ref={ref => {
                                         if (ref && video.stream) {
@@ -591,10 +537,13 @@ export default function VideoMeetComponent() {
                                         }
                                     }}
                                     autoPlay
-                                    style={styles.conferenceVideo}
-                                />
+                                    style={{ width: '40vw', height: '20vh', minWidth: '30vw', borderRadius: '10px' }}
+                                >
+                                </video>
                             </div>
+
                         ))}
+
                     </div>
 
                 </div>

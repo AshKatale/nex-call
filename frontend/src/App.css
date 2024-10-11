@@ -1,0 +1,101 @@
+/* From Uiverse.io by jeremyssocial */ 
+
+.outfit-bold {
+  font-family: "Outfit", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.outfit-medium {
+    font-family: "Outfit", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+.outfit-regular {
+    font-family: "Outfit", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  
+
+.landingPageContainer {
+    width: 100vw;
+    height: 100vh;
+    background: url('./assets/faded_gallery-JEludq8wsD8-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.landingPageContainer nav {
+    padding-inline: 1.2rem;
+    padding-block: 1.6rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.landingPageContainer nav h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.landingPageContainer nav .navList {
+    display: flex;
+    gap: 1.6rem;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.mainContainer {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 3rem;
+    height: 65vh;
+    align-items: center;
+}
+
+.mainContainer div h2 {
+    font-size: 3rem;
+
+}
+
+.navBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 20px;
+    text-align: center;
+  
+  }
+  .meetContainer {
+    display: flex;
+    padding-inline: 20px;
+    height: 80vh;
+    gap: 10vw;
+    justify-content: center;
+  }
+  
+  
+  
+  .leftPanel {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  
+  }
+  
+  .rightPanel {
+    display: flex;
+    align-items: center;
+  }
+  
+  .rightPanel > img {
+    width: 30vw;
+    height: auto;
+    border-radius: 20px;
+  }

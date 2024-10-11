@@ -12,7 +12,7 @@ import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import StopScreenShareIcon from '@mui/icons-material/StopScreenShare'
 import ChatIcon from '@mui/icons-material/Chat'
 import server from '../../../backend/src/environment';
-import "./VideoMeetStyle.css";
+// import "./VideoMeetStyle.css";
 
 const server_url = `${server}`;
 
@@ -446,18 +446,70 @@ export default function VideoMeetComponent() {
         getMedia();
     }
 
+    const styles = {
+        meetVideoContainer: {
+            position: 'relative',
+            height: '100vh',
+            background: 'rgb(1, 4, 48)',
+        },
+        meetUserVideo: {
+            position: 'absolute',
+            bottom: '10vh',
+            height: '20vh',
+            width: 'auto',
+            left: 0,
+            borderRadius: '20px',
+        },
+        buttonContainers: {
+            position: 'absolute',
+            width: '100vw',
+            bottom: 0,
+            textAlign: 'center',
+        },
+        buttonIcon: {
+            fontSize: '3rem',
+        },
+        conferenceView: {
+            display: 'flex',
+            padding: '10px',
+            gap: '10px',
+        },
+        conferenceVideo: {
+            width: '40vw',
+            height: '20vh',
+            minWidth: '30vw',
+            borderRadius: '10px',
+        },
+        chatRoom: {
+            position: 'absolute',
+            height: '90vh',
+            right: 0,
+            background: 'white',
+            borderRadius: '10px',
+            width: '30vw',
+            paddingInline: '20px',
+        },
+        chatContainer: {
+            position: 'relative',
+            height: '100%',
+        },
+        chattingArea: {
+            position: 'absolute',
+            bottom: 0,
+        },
+    };
 
     return (
-        <div>
+        <div style={styles.meetVideoContainer}>
 
             {askForUsername === true ?
 
                 <div style={{display:'flex', padding:20, alignItems:'center'}}>
 
                     <div style={{marginLeft:100, marginTop:-150}}>
-                    <h2 style={{fontFamily:'outfit'}}>Enter into Lobby </h2>
+                    <h2 style={{fontFamily:'outfit', color:'white'}}>Enter into Lobby </h2>
                     <div style={{display:'flex', alignItems:'center'}}>
-                    <TextField style={{margin:10}} id="outlined-basic" label="Username" value={username} onChange={e => setUsername(e.target.value)} variant="outlined" />
+                    <TextField style={{margin:10, backgroundColor:'white', borderRadius:10}} id="outlined-basic" label="Username" value={username} onChange={e => setUsername(e.target.value)} variant="outlined" />
                     <Button style={{height:50}} variant="contained" onClick={connect}>Connect</Button>
                     </div>
                     </div>
@@ -502,8 +554,8 @@ export default function VideoMeetComponent() {
                     </div> : <></>}
 
 
-                    <div className="buttonContainers">
-                        <IconButton onClick={handleVideo} style={{ color: "white" }}>
+                    <div className="buttonContainers" style={styles.buttonContainers}>
+                        <IconButton onClick={handleVideo} style={{ color: "white", ...styles.buttonIcon }}>
                             {(video === true) ? <VideocamIcon /> : <VideocamOffIcon />}
                         </IconButton>
                         <IconButton onClick={handleEndCall} style={{ color: "red" }}>
@@ -528,11 +580,10 @@ export default function VideoMeetComponent() {
 
                     <video className="meetUserVideo" ref={localVideoref} autoPlay muted></video>
 
-                    <div className="conferenceView">
+                    <div className="conferenceView" style={styles.conferenceView}>
                         {videos.map((video) => (
                             <div key={video.socketId}>
                                 <video
-
                                     data-socket={video.socketId}
                                     ref={ref => {
                                         if (ref && video.stream) {
@@ -540,12 +591,10 @@ export default function VideoMeetComponent() {
                                         }
                                     }}
                                     autoPlay
-                                >
-                                </video>
+                                    style={styles.conferenceVideo}
+                                />
                             </div>
-
                         ))}
-
                     </div>
 
                 </div>

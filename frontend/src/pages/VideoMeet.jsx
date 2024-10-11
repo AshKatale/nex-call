@@ -466,7 +466,7 @@ export default function VideoMeet() {
                 </div> :
 
 
-                <div style={{ position: 'relative', height: '100vh', background: 'rgb(1, 4, 48)' }}>
+                <div style={{ position: 'relative', height: '100vh', background: 'rgb(37, 79, 148)' }}>
 
                     {showModal ? <div style={{ position: 'absolute', height: '90vh', right: 0, background: 'white', borderRadius: '10px', width: '30vw', paddingInline: '20px' }}>
 
@@ -537,7 +537,7 @@ export default function VideoMeet() {
                                         }
                                     }}
                                     autoPlay
-                                    style={{ width: '40vw', height: '20vh', minWidth: '30vw', borderRadius: '10px' }}
+                                    style={{ width: 'auto', height: '300px', minWidth: '30vw', borderRadius: '20px' }}
                                 >
                                 </video>
                             </div>

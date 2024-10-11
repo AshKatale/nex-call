@@ -12,7 +12,7 @@ import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import StopScreenShareIcon from '@mui/icons-material/StopScreenShare'
 import ChatIcon from '@mui/icons-material/Chat'
 import server from '../../../backend/src/environment';
-// import "./VideoMeetStyle.css";
+import "./VideoMeetStyle.css";
 
 const server_url = `${server}`;
 
